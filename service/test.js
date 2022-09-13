@@ -25,44 +25,60 @@ let app = {
 
 var a = [
   {
-    image:
-      "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=629&q=80",
-    title: "test bk 1",
-    price: "$50",
-    bid_amount: "$30",
-    startdate: "2022-09-06T11:06:00.911Z",
-    enddate: "2022-09-07T11:08:00.911Z",
-    countdown: "",
+    product_id: "1",
+    short_title: "Yellow Bluetooth HeadPhones",
+    product_image:
+      "https://mytradingzone.com/crypto/upload/products/1661323202.png",
+    details: "<p>Yellow Bluetooth HeadPhones</p>",
+    price: "50.00",
+    bid_amount: "10.00",
+    countdown: "6000",
+    is_start: "YES",
+    start_time: "1662632083",
+    end_time: "2022-09-14T17:57:50.605Z",
+    unique_key: "abc",
   },
   {
-    image:
-      "https://media.istockphoto.com/photos/brown-leather-shoe-picture-id187310279?k=20&m=187310279&s=612x612&w=0&h=WDavpCxsLbj_PRpoY-3PsS2zvuP0Vk0Ci22sRLO9DzE=",
-    title: "test bk 2",
-    price: "$50",
-    bid_amount: "$30",
-    startdate: "2019-09-07T10:15:40",
-    enddate: "2022-09-07T18:57:40.605Z",
-    countdown: "",
+    product_id: "2",
+    short_title: "iPhone 11",
+    product_image:
+      "https://mytradingzone.com/crypto/upload/products/1661323345.png",
+    details: "<p>iPhone 11</p>",
+    price: "500.00",
+    bid_amount: "00.00",
+    countdown: "36000",
+    is_start: "YES",
+    start_time: "1662632081",
+    end_time: "2022-09-13T17:57:50.605Z",
+    unique_key: "abc",
   },
   {
-    image:
-      "https://media.istockphoto.com/photos/beautiful-young-woman-choosing-and-buying-shoes-in-boutique-picture-id1222260514?k=20&m=1222260514&s=612x612&w=0&h=L5bXmkq0vIpDJAp-s1nHFCuseyrstFSm_VEb9ygC_oA=",
-    title: "test bk 3",
-    price: "$50",
-    bid_amount: "$30",
-    startdate: "2019-09-07T10:15:30",
-    enddate: "2022-09-07T20:57:42.605Z",
-    countdown: "",
+    product_id: "3",
+    short_title: "Apple AirPods",
+    product_image:
+      "https://mytradingzone.com/crypto/upload/products/1661323419.png",
+    details: "<p>Apple AirPods</p>",
+    price: "300.00",
+    bid_amount: "200.00",
+    countdown: "48000",
+    is_start: "YES",
+    start_time: "1662632079",
+    end_time: "2022-09-14T10:10:00.605Z",
+    unique_key: "abc",
   },
   {
-    image:
-      "https://media.istockphoto.com/photos/traditional-indian-grooms-red-wedding-shoes-with-sword-on-the-picture-id870555292?k=20&m=870555292&s=612x612&w=0&h=2GII16JZ6jA9ajvqrAZ9SixFKoD_ZiiBmqr-JotY8NA=",
-    title: "test bk 4",
-    price: "$50",
-    bid_amount: "$30",
-    startdate: "2019-09-07T10:15:32",
-    enddate: "2022-09-07T23:57:35.605Z",
-    countdown: "",
+    product_id: "4",
+    short_title: "Shoes",
+    product_image:
+      "https://mytradingzone.com/crypto/upload/products/1661323744.png",
+    details: "<p>Shoes</p>",
+    price: "400.00",
+    bid_amount: "85.00",
+    countdown: "64000",
+    is_start: "YES",
+    start_time: "1662632077",
+    end_time: "2022-09-15T17:57:50.605Z",
+    unique_key: "abc",
   },
 ];
 // notiRef.set(a);
@@ -71,7 +87,7 @@ async function b() {
   return new Promise(async (res, rej) => {
     try {
       await notiRef.on("value", async (snapshot) => {
-        const data = await snapshot.val();
+        var data = await snapshot.val();
         res(data);
       });
     } catch (e) {
@@ -87,40 +103,65 @@ const secondsEL = 1;
 let abc = [];
 var data = [];
 printStatement = async () => {
-  data = await b();
   setInterval(countdown, 1000);
 };
+
 setTimeout(printStatement, 1000);
-function countdown() {
-  data.forEach((element, index) => {
-    const endDate = new Date(element.enddate);
-    const currentDate = new Date(new Date().getTime() + 330 * 60 * 1000);
-    const totalSeconds = (endDate - currentDate) / 1000;
-    const minutes = Math.floor(totalSeconds / 60) % 60;
-    const hours = Math.floor(totalSeconds / 3600) % 24;
-    const days = Math.floor(totalSeconds / 3600 / 24);
-    const seconds = Math.floor(totalSeconds) % 60;
-    hoursEl.innerText = hours;
-    minsEL.innerText = minutes;
-    secondsEL.innerText = seconds;
-    let time = "" + days + ":" + hours + ":" + minutes + ":" + seconds;
-    if (parseInt(totalSeconds) <= 5) {
-      let date = new Date(element.enddate);
-      element.enddate = date.setSeconds(date.getSeconds() + 4);
-    }
+async function countdown() {
+  // console.log(data);
+  data = await b();
+  // console.log(data);
+  if (data != null) {
+    data.forEach((element, index) => {
+      const endDate = new Date(element.end_time);
+      const currentDate = new Date(new Date().getTime() + 330 * 60 * 1000);
+      const totalSeconds = (endDate - currentDate) / 1000;
+      const minutes = Math.floor(totalSeconds / 60) % 60;
+      const hours = Math.floor(totalSeconds / 3600) % 24;
+      const days = Math.floor(totalSeconds / 3600 / 24);
+      const seconds = Math.floor(totalSeconds) % 60;
+      hoursEl.innerText = hours;
+      minsEL.innerText = minutes;
+      secondsEL.innerText = seconds;
+      let time = "" + days + ":" + hours + ":" + minutes + ":" + seconds;
+      if (parseInt(totalSeconds) <= 5) {
+        let date = new Date(element.end_time);
+        element.end_time = date.setSeconds(date.getSeconds() + 4);
+      }
+      if (element.user) {
+        abc[index] = {
+          short_title: element.short_title,
+          bid_amount: element.bid_amount,
+          details: element.details,
+          is_start: element.is_start,
+          price: element.price,
+          product_id: element.product_id,
+          product_image: element.product_image,
+          short_title: element.short_title,
+          end_time: element.end_time,
+          countdown: time,
+          // unique_key: element.unique_key,
+          user: element.user,
+        };
+      } else {
+        abc[index] = {
+          short_title: element.short_title,
+          bid_amount: element.bid_amount,
+          details: element.details,
+          is_start: element.is_start,
+          price: element.price,
+          product_id: element.product_id,
+          product_image: element.product_image,
+          short_title: element.short_title,
+          end_time: element.end_time,
+          countdown: time,
+          // unique_key: element.unique_key,
+        };
+      }
+    });
 
-    abc[index] = {
-      title: element.title,
-      price: element.price,
-      bid_amount: element.bid_amount,
-      startdate: element.startdate,
-      enddate: element.enddate,
-      countdown: time,
-      image: element.image,
-    };
-  });
-
-  notiRef.set(abc);
+    notiRef.set(abc);
+  }
 }
 
 //---------------------------------------------------//---------------------------------------------
@@ -144,9 +185,9 @@ module.exports = {
     return new Promise(async (res, rej) => {
       try {
         data.map(async (item, index) => {
-          if (item.title == abc) {
-            let date = new Date(item.enddate);
-            data[index].enddate = date.setSeconds(date.getSeconds() + 4);
+          if (item.product_id == abc) {
+            let date = new Date(item.end_time);
+            data[index].end_time = date.setSeconds(date.getSeconds() + 4);
           }
         });
         res("data updated");

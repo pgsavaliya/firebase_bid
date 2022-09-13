@@ -16,7 +16,7 @@ exports.add = async (req, res) => {
 };
 exports.addbid = async (req, res) => {
   try {
-    let resp = await testService.addbid(req.body.title);
+    let resp = await testService.addbid(req.body.product_id);
     if (resp) {
       res.send(resp);
     } else {
