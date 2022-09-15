@@ -49,7 +49,7 @@ var a = [
     countdown: "36000",
     is_start: "YES",
     start_time: "1662632081",
-    end_time: "2022-09-13T17:57:50.605Z",
+    end_time: "2022-09-17T17:57:50.605Z",
     unique_key: "abc",
   },
   {
@@ -114,6 +114,7 @@ async function countdown() {
   if (data != null) {
     data.forEach((element, index) => {
       const endDate = new Date(element.end_time);
+
       const currentDate = new Date(new Date().getTime() + 330 * 60 * 1000);
       const totalSeconds = (endDate - currentDate) / 1000;
       const minutes = Math.floor(totalSeconds / 60) % 60;
@@ -124,39 +125,75 @@ async function countdown() {
       minsEL.innerText = minutes;
       secondsEL.innerText = seconds;
       let time = "" + days + ":" + hours + ":" + minutes + ":" + seconds;
-      if (parseInt(totalSeconds) <= 5) {
-        let date = new Date(element.end_time);
-        element.end_time = date.setSeconds(date.getSeconds() + 4);
+      if (element.price >= element.bid_amount) {
+        if (parseInt(totalSeconds) <= 5) {
+          let date = new Date(element.end_time);
+          date.setSeconds(date.getSeconds() + 4);
+          element.end_time = date.toISOString();
+        }
       }
-      if (element.user) {
-        abc[index] = {
-          short_title: element.short_title,
-          bid_amount: element.bid_amount,
-          details: element.details,
-          is_start: element.is_start,
-          price: element.price,
-          product_id: element.product_id,
-          product_image: element.product_image,
-          short_title: element.short_title,
-          end_time: element.end_time,
-          countdown: time,
-          // unique_key: element.unique_key,
-          user: element.user,
-        };
+      if (time <= 0) {
+        if (element.user) {
+          abc[index] = {
+            short_title: element.short_title,
+            bid_amount: element.bid_amount,
+            details: element.details,
+            is_start: "NO",
+            price: element.price,
+            product_id: element.product_id,
+            product_image: element.product_image,
+            short_title: element.short_title,
+            end_time: element.end_time,
+            countdown: "0:0:0:0",
+            // unique_key: element.unique_key,
+            user: element.user,
+          };
+        } else {
+          abc[index] = {
+            short_title: element.short_title,
+            bid_amount: element.bid_amount,
+            details: element.details,
+            is_start: "NO",
+            price: element.price,
+            product_id: element.product_id,
+            product_image: element.product_image,
+            short_title: element.short_title,
+            end_time: element.end_time,
+            countdown: "0:0:0:0",
+            // unique_key: element.unique_key,
+          };
+        }
       } else {
-        abc[index] = {
-          short_title: element.short_title,
-          bid_amount: element.bid_amount,
-          details: element.details,
-          is_start: element.is_start,
-          price: element.price,
-          product_id: element.product_id,
-          product_image: element.product_image,
-          short_title: element.short_title,
-          end_time: element.end_time,
-          countdown: time,
-          // unique_key: element.unique_key,
-        };
+        if (element.user) {
+          abc[index] = {
+            short_title: element.short_title,
+            bid_amount: element.bid_amount,
+            details: element.details,
+            is_start: element.is_start,
+            price: element.price,
+            product_id: element.product_id,
+            product_image: element.product_image,
+            short_title: element.short_title,
+            end_time: element.end_time,
+            countdown: time,
+            // unique_key: element.unique_key,
+            user: element.user,
+          };
+        } else {
+          abc[index] = {
+            short_title: element.short_title,
+            bid_amount: element.bid_amount,
+            details: element.details,
+            is_start: element.is_start,
+            price: element.price,
+            product_id: element.product_id,
+            product_image: element.product_image,
+            short_title: element.short_title,
+            end_time: element.end_time,
+            countdown: time,
+            // unique_key: element.unique_key,
+          };
+        }
       }
     });
 
