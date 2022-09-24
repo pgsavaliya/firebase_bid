@@ -9,3 +9,4 @@ module.exports = v1;
 
 v1.post("/add", testController.add);
 v1.post("/addbid", testController.addbid);
+v1.get("/changebackground", testController.changeback);
