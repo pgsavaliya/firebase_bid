@@ -172,14 +172,14 @@ module.exports = {
         // console.log("dtaa..........", data);
         await data.map((element, index) => {
           if (element.product_id == id) {
-            data[index].is_backgroung = true;
+            data[index].is_background = true;
           }
         });
         notiRef.set(data);
         setTimeout(async () => {
           await data.map((element, index) => {
             if (element.product_id == id) {
-              data[index].is_backgroung = false;
+              data[index].is_background = false;
             }
           });
           //   console.log(data);
