@@ -8,9 +8,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.get("/", (req, res, next) => {
-//   res.status(200).json({ message: "Initial Route for firebase!!" });
-// });
+app.get("/", (req, res, next) => {
+  res.status(200).json({ message: "Initial Route for firebase!!" });
+});
 
 app.use("/v1", v1);
 
@@ -23,18 +23,19 @@ require("firebase/compat/database");
 // const firebase = require("firebase/compat/app");
 // require("firebase/compat/database");
 const firebaseConfig = {
-  apiKey: "AIzaSyD4Iujim3WdHIBDu97bEZ3IBxvtOLfyUqI",
-  authDomain: "fir-d9bc8.firebaseapp.com",
-  projectId: "fir-d9bc8",
-  storageBucket: "fir-d9bc8.appspot.com",
-  messagingSenderId: "1050224159575",
-  appId: "1:1050224159575:web:15260baa44ab5543d9ec12",
-  measurementId: "G-Y3PJRBP2RY",
+  apiKey: "AIzaSyBGNq5r1cno7xj9EziOcHuM5enNlmmkftc",
+  authDomain: "crypto-bid-coins.firebaseapp.com",
+  databaseURL: "https://crypto-bid-coins-default-rtdb.firebaseio.com",
+  projectId: "crypto-bid-coins",
+  storageBucket: "crypto-bid-coins.appspot.com",
+  messagingSenderId: "419405628251",
+  appId: "1:419405628251:web:f1f9c561f87b63e02a107e",
 };
+
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 var time1 = new Date().getMinutes();
-const notiRef = db.ref("/Pavan1");
+const notiRef = db.ref("/PRODUCTS");
 
 async function b() {
   return new Promise(async (res, rej) => {
@@ -54,13 +55,12 @@ const hoursEl = 1;
 const minsEL = 1;
 const secondsEL = 1;
 let abc = [];
-// printStatement = async () => {
-setInterval(countdown, 1000);
-// };
+printStatement = async () => {
+  setInterval(countdown, 1000);
+};
 
-// setTimeout(printStatement, 1000);
+setTimeout(printStatement, 1000);
 async function countdown() {
-  console.log(new Date().toLocaleTimeString());
   let data = await new Promise(async (res, rej) => {
     try {
       let xyz1 = await notiRef.on("value", async (snapshot) => {
@@ -85,6 +85,7 @@ async function countdown() {
   // });
   // let data = await b();
   if (data != null) {
+    console.log(data);
     for (const child in data) {
       if (data[child].is_visible == true) {
         var is_background, user, countdown;
@@ -255,13 +256,13 @@ async function countdown() {
           }
 
           if (!user) {
-            db.ref("/Pavan1/" + child + "/").update({
+            db.ref("/PRODUCTS/" + child + "/").update({
               countdown: countdown,
               is_background: is_background,
               end_time: data[child].end_time,
             });
           } else {
-            db.ref("/Pavan1/" + child + "/").update({
+            db.ref("/PRODUCTS/" + child + "/").update({
               countdown: countdown,
               user: user,
               is_background: is_background,
