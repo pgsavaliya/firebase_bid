@@ -26,3 +26,16 @@ exports.addbid = async (req, res) => {
     res.send(err);
   }
 };
+
+exports.changeback = async (req, res) => {
+  try {
+    let resp = await testService.changeback(req.query.id);
+    if (resp) {
+      res.send(resp);
+    } else {
+      res.send("not found");
+    }
+  } catch (err) {
+    res.send(err);
+  }
+};
