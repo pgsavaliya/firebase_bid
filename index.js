@@ -39,6 +39,7 @@ const notiRef = db.ref("/PRODUCTS");
 
 async function b() {
   return new Promise(async (res, rej) => {
+    //one min badhi file live ma chhale che te lai lav
     try {
       await notiRef.on("value", async (snapshot) => {
         let data = await snapshot.val();

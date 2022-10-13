@@ -1,18 +1,18 @@
 const firebase = require("firebase/compat/app");
 require("firebase/compat/database");
 const firebaseConfig = {
-  apiKey: "AIzaSyD4Iujim3WdHIBDu97bEZ3IBxvtOLfyUqI",
-  authDomain: "fir-d9bc8.firebaseapp.com",
-  projectId: "fir-d9bc8",
-  storageBucket: "fir-d9bc8.appspot.com",
-  messagingSenderId: "1050224159575",
-  appId: "1:1050224159575:web:15260baa44ab5543d9ec12",
-  measurementId: "G-Y3PJRBP2RY",
+  apiKey: "AIzaSyBGNq5r1cno7xj9EziOcHuM5enNlmmkftc",
+  authDomain: "crypto-bid-coins.firebaseapp.com",
+  databaseURL: "https://crypto-bid-coins-default-rtdb.firebaseio.com",
+  projectId: "crypto-bid-coins",
+  storageBucket: "crypto-bid-coins.appspot.com",
+  messagingSenderId: "419405628251",
+  appId: "1:419405628251:web:f1f9c561f87b63e02a107e",
 };
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 var time1 = new Date().getMinutes();
-const notiRef = db.ref("/Pavan1");
+const notiRef = db.ref("/PRODUCTS");
 
 // const daysEl = 1;
 // const hoursEl = 1;
