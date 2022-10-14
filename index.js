@@ -59,7 +59,7 @@ const secondsEL = 1;
 let abc = [];
 printStatement = async () => {
   // setInterval(countdown, 1000);
-  cron.schedule("* * * * * *", async () => {
+  cron.schedule("*/10 * * * * *", async () => {
     console.log("Pavan");
 
     let data = await new Promise(async (res, rej) => {
